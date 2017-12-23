@@ -15,43 +15,56 @@ from os.path import isfile, join
 #                         digit).
 
 def is_october(date):
-	if date[1] == 10:
+	if date[1] == '10':
 		return True 
 	else:
 		return False
 
 
 def parse_date(date_string):
-	# TODO: this is probably totally wrong
-	date = [date_string[0:5], date_string[6:7], date_string[8:9]]
+	date = [date_string[0:4], date_string[4:6], date_string[6:8]]
 	return date
 
 
 def save(date, split, all_data):
-	# TODO: this parsing won't work -- need way more edge case handling
-	location = split[0]
-	temp = split[3]
-	dewp = split[4]
-	visibility = split[7]
-	wind = split[8]
-	precip = split[13]
-	codes = split[15]
-	all_data[location][date] = [temp, dewp, visibility, wind, precip, codes]
+	location = float(split[0])
+	temp = float(split[3])
+	dewp = float(split[4])
+	visibility = float(split[7])
+	wind = float(split[8])
+	precip = float(split[13])
+	codes = float(split[15])
+	all_data.append([location, date, temp, dewp, visibility, wind, precip, codes])
 	return all_data
 
 
+def cleanup(split):
+	cleaned = []
+	for entry in split:
+		if len(entry) > 0:
+			if entry != '\n':
+				cleaned.append(entry)
+	return np.asarray(cleaned)
+
+
 def read_data():
-	all_data = # STRUCTURE
+	all_data = []
 	all_files = [f for f in listdir('raw_data') if isfile(join('raw_data', f))]
+	print 'reading ' + str(len(all_files)) + ' files'
 	for file in all_files:
-		o = open(file)
+		print str(file) + '...'
+		o = open('raw_data/' + file)
 		curr_line = 0
 		for line in o.readlines():
 			if curr_line > 0: # skip the first line
 				split = line.split(' ')
-				date = parse_date(split[2])
-				if is_october(date):
-					save(date, split, all_data)
+				if len(split) < 50:
+					continue
+				else:
+					cleaned = cleanup(split)
+					date = parse_date(cleaned[2])
+					if is_october(date):
+						save(cleaned[2], cleaned, all_data)
 
 			curr_line += 1
-	return all_data
+	return np.array(all_data)
