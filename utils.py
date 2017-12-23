@@ -29,12 +29,22 @@ def parse_date(date_string):
 def save(date, split, all_data):
 	location = float(split[0])
 	temp = float(split[3])
+	if temp == 9999.9:
+		temp = 0.0
 	dewp = float(split[4])
+	if dewp == 9999.9:
+		dewp = 0.0
 	visibility = float(split[7])
+	if visibility == 999.9 or visibility == 9999.9:
+		visibility = 0.0
 	wind = float(split[8])
+	if wind == 999.9:
+		wind = 0.0
 	precip = float(split[13])
-	codes = float(split[15])
-	all_data.append([location, date, temp, dewp, visibility, wind, precip, codes])
+	if precip == 99.99:
+		precip = 0.0
+	all_data.append([location, date[0], date[1], date[2], temp, dewp, visibility, wind, precip])
+	print all_data[-1]
 	return all_data
 
 
@@ -64,7 +74,7 @@ def read_data():
 					cleaned = cleanup(split)
 					date = parse_date(cleaned[2])
 					if is_october(date):
-						save(cleaned[2], cleaned, all_data)
+						save(date, cleaned, all_data)
 
 			curr_line += 1
 	return np.array(all_data)
