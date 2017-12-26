@@ -15,40 +15,58 @@ num_locations = 11
 
 
 def report_basic_stats(all_weather, minimum, maximum):
-	# number of days it rains, on average
 	num_years = maximum - minimum + 1
 	years_days_rain = np.zeros((num_years, days_in_month)) # data structure of shape num_years x days_in_oct
 
-	# inches of rain in October, on average
 	years_locs_rain_amount = np.zeros((num_years, num_locations)) # data structure of shape num_years x num_locations
 
-	# rainiest year by number of days
-	# data structure of shape num_years x num_locations
 	years_locs_rainy_days = np.zeros((num_years, num_locations)) # data structure of shape num_years x num_locations
 
-	# number of days with low visibility
-	# data structure of shape num_years x num_locations
-	#years_locs_visibility = np.zeros((maximum - minimum, num_locations)) # data structure of shape num_years x num_locations
+	visibilities = list()
+	precipitations = list()
+	temperatures = list()
+	dewpoint_offsets = list()
 
 	for i in range(all_weather.shape[0]):
 		datapoint = all_weather[i]
 		yr = int(datapoint[year] - minimum) # adjust to use as index
 		loc = int(datapoint[location])
-		if datapoint[precip] != 0:
+		if datapoint[precip] > 0:
 			years_days_rain[yr][loc] = 1 # at each index is either 0 (no precip) or 1 (if that day had rain in any location)
-			years_locs_rain_amount[yr][loc] += 1 # increment each location when a day has rain
-		years_locs_rainy_days[yr][loc] += datapoint[precip] # increment each location with precip amount
-	#	years_locs_visibility[yr][loc] += datapoint[visibility] # increment each location when a day has low visibility
+			years_locs_rainy_days[yr][loc] += 1 # increment each location when a day has rain
+		years_locs_rain_amount[yr][loc] += datapoint[precip] # increment each location with precip amount
+		if datapoint[visibility] > 0:
+			visibilities.append(datapoint[visibility])
+		precipitations.append(datapoint[precip])
+		temperatures.append(datapoint[temp])
+		dewpoint_offsets.append(datapoint[temp] - datapoint[dewp])
 
-	# average visibility
-	print np.mean(all_weather, axis=visibility)
+	"""print 'number of days it rains somewhere in the Outback, on average by year'
+	for i in range(0, years_days_rain.shape[0]):
+		entry = years_days_rain[i]
+		print minimum + i, len(np.nonzero(entry)[0])
 
-	# average amount of rain
-	print np.mean(all_weather, axis=precip)
+	print 'inches of rain in October, by year and location'
+	for i in range(0, years_locs_rain_amount.shape[0]):
+		print minimum + i, years_locs_rain_amount[i]
 
-	# average temperature
-	print np.mean(all_weather, axis=temp)
-	# rainiest weather station, on average
+	print 'number of rainy days, by location'
+	for i in range(0, years_locs_rainy_days.shape[0]):
+		entry = years_locs_rainy_days[i]
+		print minimum + i, entry"""
+
+
+	print 'average visibility'
+	print sum(visibilities)/len(visibilities)
+
+	print 'average amount of rain'
+	print sum(precipitations)/len(precipitations)
+
+	print 'average temperature'
+	print sum(temperatures)/len(temperatures)
+
+	print 'average difference between dewpoint and temperature'
+	print sum(dewpoint_offsets)/len(dewpoint_offsets)
 
 
 all_weather = read_data()

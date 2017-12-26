@@ -41,7 +41,7 @@ def save(date, split, all_data):
 	if wind == 999.9:
 		wind = 0.0
 	precip = float(split[13])
-	if precip == 99.99:
+	if precip == 99.99 or precip == 999.9:
 		precip = 0.0
 	all_data.append([location, int(date[0]), int(date[1]), int(date[2]), temp, dewp, visibility, wind, precip])
 	return all_data
