@@ -41,7 +41,7 @@ def report_basic_stats(all_weather, minimum, maximum):
 		temperatures.append(datapoint[temp])
 		dewpoint_offsets.append(datapoint[temp] - datapoint[dewp])
 
-	"""print 'number of days it rains somewhere in the Outback, on average by year'
+	print 'number of days it rains somewhere in the Outback, on average by year'
 	for i in range(0, years_days_rain.shape[0]):
 		entry = years_days_rain[i]
 		print minimum + i, len(np.nonzero(entry)[0])
@@ -53,7 +53,7 @@ def report_basic_stats(all_weather, minimum, maximum):
 	print 'number of rainy days, by location'
 	for i in range(0, years_locs_rainy_days.shape[0]):
 		entry = years_locs_rainy_days[i]
-		print minimum + i, entry"""
+		print minimum + i, entry
 
 
 	print 'average visibility'
