@@ -755,9 +755,12 @@ number of rainy days, by location
 
 average visibility
 1012.34091787
+
 average amount of rain
 6.78590828924
+
 average temperature
 79.2959611993
+
 average difference between dewpoint and temperature
 70.8342328042
