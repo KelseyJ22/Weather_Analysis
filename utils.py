@@ -27,7 +27,7 @@ def parse_date(date_string):
 
 
 def save(date, split, all_data):
-	location = float(split[0])
+	location = int(split[0])
 	temp = float(split[3])
 	if temp == 9999.9:
 		temp = 0.0
@@ -43,8 +43,7 @@ def save(date, split, all_data):
 	precip = float(split[13])
 	if precip == 99.99:
 		precip = 0.0
-	all_data.append([location, date[0], date[1], date[2], temp, dewp, visibility, wind, precip])
-	print all_data[-1]
+	all_data.append([location, int(date[0]), int(date[1]), int(date[2]), temp, dewp, visibility, wind, precip])
 	return all_data
 
 
