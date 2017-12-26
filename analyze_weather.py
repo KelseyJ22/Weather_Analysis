@@ -44,16 +44,20 @@ def report_basic_stats(all_weather, minimum, maximum):
 	print 'number of days it rains somewhere in the Outback, on average by year'
 	for i in range(0, years_days_rain.shape[0]):
 		entry = years_days_rain[i]
-		print minimum + i, len(np.nonzero(entry)[0])
+		print minimum + i, len(np.nonzero(entry)[0]), '\n'
+
+	print 'days in which it rained somewhere in the Outback'
+	for i in range(0, years_days_rain.shape[0]):
+		print minimum + i, years_days_rain[i], '\n'
 
 	print 'inches of rain in October, by year and location'
 	for i in range(0, years_locs_rain_amount.shape[0]):
-		print minimum + i, years_locs_rain_amount[i]
+		print minimum + i, years_locs_rain_amount[i], '\n'
 
 	print 'number of rainy days, by location'
 	for i in range(0, years_locs_rainy_days.shape[0]):
 		entry = years_locs_rainy_days[i]
-		print minimum + i, entry
+		print minimum + i, entry, '\n'
 
 
 	print 'average visibility'
