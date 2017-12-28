@@ -13,6 +13,7 @@ wind = 7
 precip = 8
 days_in_month = 31
 num_locations = 11
+locations = ['Alice Springs', 'Alice Springs Airport', 'Coober Pedy', 'Coober Pedy Airport', 'Darwin', 'Elliott', 'Katherine', 'Moomba', 'Oodnadatta', 'Tennant Creek', 'Tennant Creek Airport']
 
 
 def report_basic_stats(all_weather, minimum, maximum):
@@ -51,7 +52,7 @@ def report_basic_stats(all_weather, minimum, maximum):
 		"""years.append(minimum + i)
 		rainy_days.append(len(np.nonzero(entry)[0]))
 	plt.bar(np.arange(len(years)), rainy_days)
-	plt.xticks(np.arange(len(years)), years)
+	plt.xticks(np.arange(len(years)), years, rotation = 45)
 	plt.title('number of days it rained somewhere in the Outback')
 	plt.show()"""
 
@@ -66,6 +67,7 @@ def report_basic_stats(all_weather, minimum, maximum):
 	for i in range(0, years_locs_rain_amount.shape[0]):
 		print minimum + i, years_locs_rain_amount[i], '\n'
 		"""plt.bar(np.arange(len(years_locs_rain_amount[i])), years_locs_rain_amount[i])
+		plt.xticks(np.arange(len(years_locs_rain_amount[i])), locations, rotation = 45)
 		plt.title('inches of rain by location in ' + str(minimum + i))
 		plt.show()"""
 
@@ -75,6 +77,7 @@ def report_basic_stats(all_weather, minimum, maximum):
 		entry = years_locs_rainy_days[i]
 		print minimum + i, entry, '\n'
 		plt.bar(np.arange(len(years_locs_rainy_days[i])), years_locs_rainy_days[i])
+		plt.xticks(np.arange(len(years_locs_rain_amount[i])), locations, rotation = 45)
 		plt.title('number of rainy days by location in ' + str(minimum + i))
 		plt.show()
 
