@@ -1,5 +1,6 @@
 from utils import read_data
 import numpy as np
+import matplotlib.pyplot as plt
 
 location = 0
 year = 1
@@ -41,23 +42,41 @@ def report_basic_stats(all_weather, minimum, maximum):
 		temperatures.append(datapoint[temp])
 		dewpoint_offsets.append(datapoint[temp] - datapoint[dewp])
 
-	print 'number of days it rains somewhere in the Outback, on average by year'
+	print 'number of days it rained somewhere in the Outback, on average by year'
+	"""years = list()
+	rainy_days = list()"""
 	for i in range(0, years_days_rain.shape[0]):
 		entry = years_days_rain[i]
 		print minimum + i, len(np.nonzero(entry)[0]), '\n'
+		"""years.append(minimum + i)
+		rainy_days.append(len(np.nonzero(entry)[0]))
+	plt.bar(np.arange(len(years)), rainy_days)
+	plt.xticks(np.arange(len(years)), years)
+	plt.title('number of days it rained somewhere in the Outback')
+	plt.show()"""
 
 	print 'days in which it rained somewhere in the Outback'
 	for i in range(0, years_days_rain.shape[0]):
 		print minimum + i, years_days_rain[i], '\n'
+		"""plt.bar(np.arange(len(years_days_rain[i])), years_days_rain[i])
+		plt.title('days it rained somewhere in the Outback in ' + str(minimum + i))
+		plt.show()"""
 
 	print 'inches of rain in October, by year and location'
 	for i in range(0, years_locs_rain_amount.shape[0]):
 		print minimum + i, years_locs_rain_amount[i], '\n'
+		"""plt.bar(np.arange(len(years_locs_rain_amount[i])), years_locs_rain_amount[i])
+		plt.title('inches of rain by location in ' + str(minimum + i))
+		plt.show()"""
+
 
 	print 'number of rainy days, by location'
 	for i in range(0, years_locs_rainy_days.shape[0]):
 		entry = years_locs_rainy_days[i]
 		print minimum + i, entry, '\n'
+		plt.bar(np.arange(len(years_locs_rainy_days[i])), years_locs_rainy_days[i])
+		plt.title('number of rainy days by location in ' + str(minimum + i))
+		plt.show()
 
 
 	print 'average visibility'
