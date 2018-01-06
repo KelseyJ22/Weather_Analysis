@@ -1,5 +1,9 @@
 # Weather_Analysis
-Historical weather data analysis of the Australia Outback
+Historical weather data analysis of the Australia Outback for use by the Stanford Solar Car Project (or other solar car teams) as preparation for the World Solar Challenge.
+
+The race is held in October of odd numbered years, either the second or third week of the month, from Darwin to Adelaide across the desert. The data set and analyses presented here attempts to answer the question of how likely precipiation and cloud cover is during the week of the race, based on weather in previous years.
+
+Unfortunately, there are not many weather stations in the remote Outback, and those that do exist are fairly new. That means the dataset is sparse and limited. Many stations also only report precipiation, temperature, and visibility (used here as a proxy for cloud cover/dustiness/smoke from wildfires), which is useful but less than ideal. If I find a better data source I will update this repo with similar analysis for that source.
 
 Data from https://www7.ncdc.noaa.gov/CDO/cdoselect.cmd?datasetabbv=GSOD&countryabbv&georegionabbv
 
